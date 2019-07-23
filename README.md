@@ -41,5 +41,8 @@ VERSION:
 ## Examples
 ```sh
 # Generate the sequence from the CSV file and export the CSV format
-bin/mac/64/bgs -p "'" -s 10 -e "2,3,4,5,8,9,10,11,12,13,14,15,16" csv bin/templates/dhb.client.csv 20 > ./dhb.client.new.csv
+bin/mac/64/bgs -s 10 -e "2,3,4,5,8,9,10,11,12,13,14,15,16" csv bin/templates/dhb.client.csv 20 > bin/templates/dhb.client.new.csv
+
+# Generate the sequence from the excel file and export the excel format
+bin/mac/64/bgs -t excel -s 10 -e "2,3,4,5,8,9,10,11,12,13,14,15,16" excel bin/templates/dhb.client.xls 20 > bin/templates/dhb.client.new.xlsx
 ```

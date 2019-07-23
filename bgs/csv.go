@@ -63,7 +63,7 @@ func CsvOutputSequence(t *Template) error {
 				v[i] = fmt.Sprintf("%s%d", prefix,newValue + int64(startSequence))
 				continue
 			} else if newValue, err := strconv.ParseFloat(columnValue, 64); err == nil {
-				v[i] = fmt.Sprintf("%s%f", prefix, newValue + float64( startSequence))
+				v[i] = fmt.Sprintf("%s%d", prefix, int64(newValue + float64( startSequence)))
 			} else  {
 				v[i] = fmt.Sprintf("%s%s%d", prefix, columnValue, startSequence)
 			}

@@ -21,10 +21,11 @@ const (
 var (
 	OutputTypes = map[string]bgs.TemplateOutputSequenceFunc {
 		bgs.TYPE_CSV: bgs.CsvOutputSequence,
+		bgs.TYPE_EXCEL: bgs.ExcelOutputSequence,
 	}
 )
 
-func main() {
+func main(){
 	app := cli.NewApp()
 	app.Version = "0.0.1"
 	app.Name = "bgs"
@@ -46,7 +47,7 @@ func main() {
 		{
 			Name: "excel",
 			Usage: "The template file path format must be Excel",
-			Action: csvAction,
+			Action: excelAction,
 		},
 	}
 	app.Flags = []cli.Flag{
@@ -93,6 +94,27 @@ func csvAction(ctx * cli.Context)  error {
 	t := bgs.New(file)
 	t.Config = &tc
 	t.Reader = bgs.CsvReader
+	t.OutputSequence = outputSequenceFunc
+	t.Run()
+	tc.Count = count
+	return nil
+}
+// excel动作
+func excelAction(ctx * cli.Context)  error {
+	tc, err := checkOptions(ctx)
+	if err != nil {
+		return err
+	}
+	templateFilePath, count , err := checkArgs(ctx)
+	if err != nil {
+		return err
+	}
+	tc.Count = count
+	outputSequenceFunc, _ := OutputTypes[tc.OutputType]
+	file, err := os.Open(templateFilePath)
+	t := bgs.New(file)
+	t.Config = &tc
+	t.Reader = bgs.ExcelReader
 	t.OutputSequence = outputSequenceFunc
 	t.Run()
 	tc.Count = count
