@@ -1,5 +1,5 @@
 win32:
-	@CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o bin/mac/32/bgs.exe
+	@CGO_ENABLED=0 GOOS=windows GOARCH=386 go build -o bin/win/32/bgs.exe
 win64:
 	@CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o bin/win/64/bgs.exe
 mac32:
